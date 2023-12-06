@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Legendary BtVS randomiser</title>
+<link rel="stylesheet" type="text/css" href="picnic.css" />
+</head>
+
+<body style="margin:0 5% 0 5%; font-size:18px">
+<h1>Legendary BtVS randomiser</h1>
+
+<div class="flex one two-1200">
+	<div><span>
+		<article class="card">
+			<header>Players</header>
+		<fieldset>
+			<input type="radio" id="1" name="players" value="1" checked="true" type="radio"/>
+			<label for="1" class="checkable">1</label>
+			<input type="radio" id="1 advanced" name="players" value="1 advanced" type="radio"/>
+			<label for="1 advanced" class="checkable">1 advanced</label>
+			<input type="radio" id="2" name="players" value="2" type="radio"/>
+			<label for="2" class="checkable">2</label>
+			<input type="radio" id="3" name="players" value="3" type="radio"/>
+			<label for="3" class="checkable">3</label>
+			<input type="radio" id="4" name="players" value="4" type="radio"/>
+			<label for="4" class="checkable">4</label>
+			<input type="radio" id="5" name="players" value="5" type="radio"/>
+			<label for="5" class="checkable">5</label>
+		</fieldset>
+		<footer>
+			<button type="button" id="randomise">Randomise</button>
+		</footer>
+		</article>
+	</span></div>
+	<div><span>
+		<article class="card">
+		<p id="result">Click the Randomise button!</p>
+		</article>
+	</span></div>
+<script src="./randomise.js"></script>
+
+</body>
+</html>

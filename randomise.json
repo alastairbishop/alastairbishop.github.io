@@ -1,0 +1,129 @@
+{
+	"Players": {
+		"1": {
+			"Players": 1,
+			"VillainGroups": 1,
+			"HenchmenCards": 3,
+			"Bystanders": 1,
+			"MasterStrikes": 1,
+			"Heroes": 3,
+			"ExcludeSchemes": ["Twilight terror"],
+			"IgnoreAlwaysLeads": 1
+		},
+		"1 advanced": {
+			"Players": 1,
+			"VillainGroups": 1,
+			"HenchmenCards": 3,
+			"Bystanders": 1,
+			"MasterStrikes": 5,
+			"Heroes": 3,
+			"ExcludeSchemes": ["Twilight terror"],
+			"IgnoreAlwaysLeads": 1
+		},
+		"2": {
+			"Players": 2,
+			"VillainGroups": 2,
+			"HenchmenGroups": 1,
+			"Bystanders": 2,
+			"MasterStrikes": 5,
+			"Heroes": 5
+		},
+		"3": {
+			"Players": 3,
+			"VillainGroups": 3,
+			"HenchmenGroups": 1,
+			"Bystanders": 8,
+			"MasterStrikes": 5,
+			"Heroes": 5
+		},
+		"4": {
+			"Players": 4,
+			"VillainGroups": 3,
+			"HenchmenGroups": 2,
+			"Bystanders": 8,
+			"MasterStrikes": 5,
+			"Heroes": 5
+		},
+		"5": {
+			"Players": 5,
+			"VillainGroups": 4,
+			"HenchmenGroups": 2,
+			"Bystanders": 12,
+			"MasterStrikes": 5,
+			"Heroes": 6
+		}
+	},
+	"Big bads": {
+		"Angelus": "The Scourge of Europe",
+		"The First": "The First's minions",
+		"Glorificus": "Glory's minions",
+		"The Master": "Order of Aurelius",
+		"The Mayor": "Mayor's minions"
+	},
+	"Schemes": {
+		"Convert to evil": {
+			"Scheme twists": 8,
+			"Heroes in Villain Deck": 1,
+			"Bystanders": 0
+		},
+		"Darkness falls": {
+			"Scheme twists": 8
+		},
+		"Epic struggle": {
+			"Scheme twists": 8
+		},
+		"Hellmouth opening": {
+			"Scheme twists": 8
+		},
+		"Road to damnation": {
+			"Scheme twists": 8,
+			"Heroes in Villain Deck": 1,
+			"Heroes to include": ["Angel", "Faith Lehane", "Spike", "Willow Rosenberg"],
+			"Remove Villains": 1
+		},
+		"Summon the uber vamps": {
+			"Scheme twists": 8,
+			"Include henchmen": ["Turok-Han Vampires"]
+		},
+		"Twilight terror": {
+			"Scheme twists": 8,
+			"Starting courage tokens per player": 4
+		},
+		"Vile agenda": {
+			"Scheme twists": 8
+		}
+	},
+	"Villains": [
+		"Demons",
+		"The First's minions",
+		"Glory's minions",
+		"Harmony's gang",
+		"Mayor's minions",
+		"Order of Aurelius",
+		"The Scourge of Europe"
+	],
+	"Henchmen": [
+		"Harbingers of Death",
+		"Hellhounds",
+		"Shark Gangsters",
+		"Turok-Han Vampires",
+		"Vampire Initiate"
+	],
+	"Heroes": [
+		"Angel",
+		"Anya Jenkins",
+		"Buffy Summers",
+		"Buffybot",
+		"Cordelia Chase",
+		"Daniel 'Oz' Osbourne",
+		"The First Slayer",
+		"Jenny Calendar",
+		"Faith Lehane",
+		"Riley Finn",
+		"Rupert Giles",
+		"Spike",
+		"Tara MacLay",
+		"Willow Rosenberg",
+		"Xander Harris"
+	]
+}
