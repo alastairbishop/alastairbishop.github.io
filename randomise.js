@@ -83,7 +83,8 @@ function ChooseVillainHeroes(scheme_config) {
 	return villain_heroes;
 }
 
-function ChooseHeroes(villain_heroes, players_config) {
+function ChooseHeroes(villain_heroes, players_config, big_bad) {
+	if (big_bad) = "Angelus") {villain_heroes.push("Angel");}
 	return ChooseRandom(config.Heroes, [], villain_heroes, players_config.Heroes);
 }
 
@@ -106,6 +107,9 @@ function Randomise() {
 	text += "<tr><td>Scheme</td><td>" + scheme + "</td></tr>";
 	
 	// Villain deck
+	//Scheme twists
+	let scheme_twists = scheme_config["Scheme twists"];
+	text += "<tr><td>Scheme twists</td><td>" + scheme_twists + "</td></tr>"
 	// Master strikes
 	let master_strikes = players_config.MasterStrikes;
 	text += "<tr><td>Master strikes</td><td>" + master_strikes + "</td></tr>";
@@ -131,7 +135,7 @@ function Randomise() {
 	}
 	
 	// Hero deck
-	let heroes = ChooseHeroes(villain_heroes, players_config);
+	let heroes = ChooseHeroes(villain_heroes, players_config, big_bad);
 	text += "<tr><td>Heroes</td><td>" + heroes.join("<br/>") + "</td></tr>";
 	
 	// Starting courage tokens
