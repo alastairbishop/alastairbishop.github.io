@@ -84,7 +84,7 @@ function ChooseVillainHeroes(scheme_config) {
 }
 
 function ChooseHeroes(villain_heroes, players_config, big_bad) {
-	if (big_bad) = "Angelus") {villain_heroes.push("Angel");}
+	if (big_bad) == "Angelus") {villain_heroes.push("Angel");}
 	return ChooseRandom(config.Heroes, [], villain_heroes, players_config.Heroes);
 }
 
