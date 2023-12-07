@@ -2,10 +2,10 @@
 
 console.log(localStorage.getItem("test"));
 if(!localStorage.getItem("test")) {
-	storeOptions;
+	storeOptions();
 } else {
 	console.log("Calling retrieveOptions");
-	retrieveOptions;
+	retrieveOptions();
 }
 
 function radioGroupValue(groupName) {
