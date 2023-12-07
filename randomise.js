@@ -13,13 +13,13 @@ function radioGroupValue(groupName) {
 	}
 }
 
-function dropDownValue(dropdownName) {
-	let e = document.getElementById(dropdownName);
+function dropDownValue(dropDownName) {
+	let e = document.getElementById(dropDownName);
 	return e.options[e.selectedIndex].text;
 }
 
 function dropDownIndex(dropDownName) {
-	let e = document.getElementById(dropdownName);
+	let e = document.getElementById(dropDownName);
 	return e.selectedIndex;
 }
 
