@@ -184,7 +184,7 @@ function randomise() {
 retrieveOptions();
 
 document.getElementById("randomise").addEventListener("click", randomise);
-document.getElementById("players").addEventListener("click", storeOptions);
+document.getElementById("players").addEventListener("change", storeOptions);
 
 let config;
 fetch("randomise.json")
