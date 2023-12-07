@@ -187,9 +187,10 @@ function randomise() {
 
 console.log(localStorage.getItem("test"));
 if(!localStorage.getItem("test")) {
-  storeOptions;
+	storeOptions;
 } else {
-  retrieveOptions;
+	console.log("Calling retrieveOptions");
+	retrieveOptions;
 }
 
 
