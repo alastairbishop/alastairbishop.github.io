@@ -106,7 +106,7 @@ function randomise() {
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
-	text += "<tr><td>Big bad</td><td>" + big_bad + "</td></tr>";
+	text += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
 	let bigBadConfig = config["Big bads"];
 	let alwaysLeads = bigBadConfig[bigBad];
 	let ignoreAlwaysLeads = ("IgnoreAlwaysLeads" in playersConfig);
