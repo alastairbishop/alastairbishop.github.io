@@ -15,13 +15,18 @@ function dropDownValue(dropDownName) {
 	return e.options[e.selectedIndex].value;
 }
 
+function dropDownText(dropDownName) {
+	let e = document.getElementById(dropDownName);
+	return e.options[e.selectedIndex].text;
+}
+
 function dropDownIndex(dropDownName) {
 	let e = document.getElementById(dropDownName);
 	return e.selectedIndex;
 }
 
 function storeOptions() {
-	localStorage.setItem("players", dropDownValue("players"));
+	localStorage.setItem("players", dropDownIndex("players"));
 }
 
 function retrieveOptions() {
@@ -120,7 +125,7 @@ function randomise() {
 	let text = "<table>";
 	
 	// Players
-	let playersConfig = config.Players[dropDownValue("players")];	
+	let playersConfig = config.Players[dropDownText("players")];	
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
