@@ -183,7 +183,7 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-console.loglocalStorage.getItem("test");
+console.log(localStorage.getItem("test"));
 if(!localStorage.getItem("test")) {
   storeOptions;
 } else {
