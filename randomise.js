@@ -1,8 +1,5 @@
 "use strict";
 
-const PLAYERS_KEY = "players";
-const ALWAYS_LEADS_KEY = "alwaysLeads";
-
 function radioGroupValue(groupName) {
 	let radioGroup = document.getElementsByName(groupName);
 	let checked = Array.from(radioGroup).find((radio => radio.checked));
@@ -24,11 +21,11 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
-	localStorage.setItem(PLAYERS_KEY, dropDownIndex("players"));
+	localStorage.setItem("players", dropDownIndex("players"));
 }
 
 function retrieveOptions() {
-	document.getElementById("players").selectedIndex = localStorage.getItem(PLAYERS_KEY);
+	document.getElementById("players").selectedIndex = localStorage.getItem("players");
 }
 
 function shuffle(array) {
