@@ -24,11 +24,11 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
-	localStorage.setItem("PLAYERS_KEY", dropDownIndex("players"));
+	localStorage.setItem(PLAYERS_KEY, dropDownIndex("players"));
 }
 
 function retrieveOptions() {
-	document.getElementById("players").selectedIndex = localStorage.getItem("PLAYERS_KEY");
+	document.getElementById("players").selectedIndex = localStorage.getItem(PLAYERS_KEY);
 }
 
 function shuffle(array) {
