@@ -1,6 +1,6 @@
 "use strict";
 
-function RadioGroupValue(groupName) {
+function radioGroupValue(groupName) {
 	let radioGroup = document.getElementsByName(groupName);
 	let checked = Array.from(radioGroup).find((radio => radio.checked));
 	if (checked === undefined) {
@@ -10,7 +10,7 @@ function RadioGroupValue(groupName) {
 	}
 }
 
-function Shuffle(array) {
+function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
   // While there remain elements to shuffle.
   while (currentIndex > 0) {
@@ -24,13 +24,15 @@ function Shuffle(array) {
   return array;
 }
 
-function ChooseRandom (array, include, exclude, total) {
+function chooseRandom (array, include, exclude, total) {
 	Shuffle(array);
 	let item;
 	let items = [...include];
 	let count = items.length;
 	for (let i = 0; i < array.length; i++) {
-		if (count >= total) {break;}
+		if (count >= total) {
+			break;
+		}
 		item = array[i];
 		if (!(exclude.includes(item)) && !(items.includes(item))) {
 			items.push(item);
@@ -40,116 +42,126 @@ function ChooseRandom (array, include, exclude, total) {
 	return items.sort();
 }
 
-function ChooseBigBad() {
-	return ChooseRandom(Object.keys(config["Big bads"]), [], [], 1);	
+function chooseBigBad() {
+	return chooseRandom(Object.keys(config["Big bads"]), [], [], 1);	
 }
 
-function ChooseScheme(players_config) {
-	let exclude_schemes = [];
-	if ("ExcludeSchemes" in players_config) {exclude_schemes = [...players_config.ExcludeSchemes];}
-	return ChooseRandom(Object.keys(config.Schemes), [], exclude_schemes, 1);	
+function chooseScheme(playersConfig) {
+	let excludeSchemes = [];
+	if ("ExcludeSchemes" in playersConfig) {
+		excludeSchemes = [...playersConfig.ExcludeSchemes];
+	}
+	return chooseRandom(Object.keys(config.Schemes), [], excludeSchemes, 1);	
 }
 
-function ChooseVillains(players_config, always_leads, ignore_always_leads, scheme_config) {
-	let villain_groups = players_config.VillainGroups;
-	if ("Remove Villains" in scheme_config) {villain_groups -= scheme_config["Remove Villains"];}
+function chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeConfig) {
+	let villainGroups = playersConfig.VillainGroups;
+	if ("Remove Villains" in schemeConfig) {villainGroups -= schemeConfig["Remove Villains"];}
 	let include = [];
-	if (!ignore_always_leads) {include.push(always_leads);}
-	return ChooseRandom(config.Villains, include, [], villain_groups);
+	if (!ignoreAlwaysLeads) {
+		include.push(alwaysLeads);
+	}
+	return chooseRandom(config.Villains, include, [], villainGroups);
 }
 
-function ChooseHenchmen(players_config, scheme_config) {
-	let henchmen_groups;
-	if ("HenchmenCards" in players_config) {
-		henchmen_groups = 1
+function chooseHenchmen(playersConfig, schemeConfig) {
+	let henchmenGroups;
+	if ("HenchmenCards" in playersConfig) {
+		henchmenGroups = 1
 	} else {
-		henchmen_groups = players_config.HenchmenGroups;
+		henchmenGroups = playersConfig.HenchmenGroups;
 	}
 	let include = [];
-	if ("Include henchmen" in scheme_config) {include = [...scheme_config["Include henchmen"]];}
-	return ChooseRandom(config.Henchmen, include, [], henchmen_groups);	
-}
-
-function ChooseVillainHeroes(scheme_config) {
-	let villain_heroes = [];
-	if ("Heroes in Villain Deck" in scheme_config) {
-		let total = scheme_config["Heroes in Villain Deck"];
-		let choose_from = config.Heroes;
-		if ("Heroes to include" in scheme_config) {
-			choose_from = [...scheme_config["Heroes to include"]];
-		}
-		villain_heroes = ChooseRandom(choose_from, [], [], total);
+	if ("Include henchmen" in schemeConfig) {
+		include = [...schemeConfig["Include henchmen"]];
 	}
-	return villain_heroes;
+	return chooseRandom(config.Henchmen, include, [], henchmenGroups);	
 }
 
-function ChooseHeroes(villain_heroes, players_config, big_bad) {
-	if (big_bad == "Angelus") {villain_heroes.push("Angel");}
-	return ChooseRandom(config.Heroes, [], villain_heroes, players_config.Heroes);
+function chooseVillainHeroes(schemeConfig) {
+	let villainHeroes = [];
+	if ("Heroes in Villain Deck" in schemeConfig) {
+		let total = schemeConfig["Heroes in Villain Deck"];
+		let chooseFrom = config.Heroes;
+		if ("Heroes to include" in schemeConfig) {
+			chooseFrom = [...schemeConfig["Heroes to include"]];
+		}
+		villainHeroes = chooseRandom(chooseFrom, [], [], total);
+	}
+	return villainHeroes;
 }
 
-function Randomise() {
+function chooseHeroes(villainHeroes, playersConfig, bigBad) {
+	if (bigBad == "Angelus") {
+		villainHeroes.push("Angel");
+	}
+	return chooseRandom(config.Heroes, [], villainHeroes, playersConfig.Heroes);
+}
+
+function randomise() {
 	let text = "<table>";
 	
 	// Players
-	let players_config = config.Players[RadioGroupValue("players")];	
+	let playersConfig = config.Players[RadioGroupValue("players")];	
 
 	// Big bad
-	let big_bad = ChooseBigBad(players_config)[0];
+	let bigBad = chooseBigBad(playersConfig)[0];
 	text += "<tr><td>Big bad</td><td>" + big_bad + "</td></tr>";
-	let big_bad_config = config["Big bads"];
-	let always_leads = big_bad_config[big_bad];
-	let ignore_always_leads = ("IgnoreAlwaysLeads" in players_config);
+	let bigBadConfig = config["Big bads"];
+	let alwaysLeads = bigBadConfig[bigBad];
+	let ignoreAlwaysLeads = ("IgnoreAlwaysLeads" in playersConfig);
 
 	// Scheme
-	let scheme = ChooseScheme(players_config)[0];
-	let scheme_config = config.Schemes[scheme];
+	let scheme = chooseScheme(playersConfig)[0];
+	let schemeConfig = config.Schemes[scheme];
 	text += "<tr><td>Scheme</td><td>" + scheme + "</td></tr>";
 	
 	// Villain deck
 	//Scheme twists
-	let scheme_twists = scheme_config["Scheme twists"];
-	text += "<tr><td>Scheme twists</td><td>" + scheme_twists + "</td></tr>"
+	let schemeTwists = schemeConfig["Scheme twists"];
+	text += "<tr><td>Scheme twists</td><td>" + schemeTwists + "</td></tr>"
 	// Master strikes
-	let master_strikes = players_config.MasterStrikes;
-	text += "<tr><td>Master strikes</td><td>" + master_strikes + "</td></tr>";
+	let masterStrikes = playersConfig.MasterStrikes;
+	text += "<tr><td>Master strikes</td><td>" + masterStrikes + "</td></tr>";
 	// Villains
-	let villains = ChooseVillains(players_config, always_leads, ignore_always_leads, scheme_config);
+	let villains = chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeConfig);
 	text += "<tr><td>Villains</td><td>" + villains.join("<br/>") + "</td></tr>";
 	// Henchmen
-	let henchmen = ChooseHenchmen(players_config, scheme_config);
+	let henchmen = chooseHenchmen(playersConfig, schemeConfig);
 	text += "<tr><td>Henchmen</td><td>"
-	if ("HenchmenCards" in players_config) {
-		text += players_config.HenchmenCards + " cards from " + henchmen;
+	if ("HenchmenCards" in playersConfig) {
+		text += playersConfig.HenchmenCards + " cards from " + henchmen;
 	} else {
 		text += henchmen.join("<br/>");
 	}
 	text += "</td></tr>"
 	// Bystanders
-	let bystanders = players_config.Bystanders;
+	let bystanders = playersConfig.Bystanders;
 	text += "<tr><td>Bystanders</td><td>" + bystanders + "</td></tr>";
 	// Heroes
-	let villain_heroes = ChooseVillainHeroes(scheme_config);
-	if (villain_heroes.length > 0) {
-		text += "<tr><td>Heroes to include in villain deck</td><td>" + villain_heroes.join("<br/>") + "</td></tr>";
+	let villainHeroes = chooseVillainHeroes(schemeConfig);
+	if (villainHeroes.length > 0) {
+		text += "<tr><td>Heroes to include in villain deck</td><td>" + villainHeroes.join("<br/>") + "</td></tr>";
 	}
 	
 	// Hero deck
-	let heroes = ChooseHeroes(villain_heroes, players_config, big_bad);
+	let heroes = chooseHeroes(villainHeroes, playersConfig, bigBad);
 	text += "<tr><td>Heroes</td><td>" + heroes.join("<br/>") + "</td></tr>";
 	
 	// Starting courage tokens
-	if ("Starting courage tokens per player" in scheme_config) {
+	if ("Starting courage tokens per player" in schemeConfig) {
 		text += "<tr><td>Starting courage tokens per player</td><td>"
-		+ scheme_config["Starting courage tokens per player"] + "</td></tr>";
+		+ schemeConfig["Starting courage tokens per player"] + "</td></tr>";
 	}
 	text += "</table>"
 	
 	document.getElementById("result").innerHTML = text;
 }
 
-document.getElementById("randomise").addEventListener("click", Randomise);
+document.getElementById("randomise").addEventListener("click", randomise);
 
 let config;
-fetch("randomise.json").then(response => response.json()).then(data => {config = data});
+fetch("randomise.json")
+	.then(response => response.json())
+	.then(data => {config = data});
 
