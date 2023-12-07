@@ -12,7 +12,7 @@ function radioGroupValue(groupName) {
 
 function dropDownValue(dropDownName) {
 	let e = document.getElementById(dropDownName);
-	return e.options[e.selectedIndex].text;
+	return e.options[e.selectedIndex].value;
 }
 
 function dropDownIndex(dropDownName) {
@@ -21,7 +21,7 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
-	localStorage.setItem("players", dropDownIndex("players"));
+	localStorage.setItem("players", dropDownValue("players"));
 }
 
 function retrieveOptions() {
