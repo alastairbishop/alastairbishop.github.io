@@ -183,7 +183,8 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-if(!localStorage.getItem("players")) {
+console.loglocalStorage.getItem("test");
+if(!localStorage.getItem("test")) {
   storeOptions;
 } else {
   retrieveOptions;
