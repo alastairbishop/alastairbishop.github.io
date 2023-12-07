@@ -1,5 +1,8 @@
 "use strict";
 
+const PLAYERS_KEY = "players";
+const ALWAYS_LEADS_KEY = "alwaysLeads";
+
 function radioGroupValue(groupName) {
 	let radioGroup = document.getElementsByName(groupName);
 	let checked = Array.from(radioGroup).find((radio => radio.checked));
@@ -8,6 +11,24 @@ function radioGroupValue(groupName) {
 	} else {
 		return checked.value;
 	}
+}
+
+function dropDownValue(dropdownName) {
+	let e = document.getElementById(dropdownName);
+	return e.options[e.selectedIndex].text;
+}
+
+function dropDownIndex(dropDownName) {
+	let e = document.getElementById(dropdownName);
+	return e.selectedIndex;
+}
+
+function storeOptions() {
+	Window.localStorage.setItem("PLAYERS_KEY", dropDownIndex("players"));
+}
+
+function retrieveOptions() {
+	document.getElementById("players").selectedIndex = Window.localStorage.getItem("PLAYERS_KEY");
 }
 
 function shuffle(array) {
@@ -102,7 +123,7 @@ function randomise() {
 	let text = "<table>";
 	
 	// Players
-	let playersConfig = config.Players[radioGroupValue("players")];	
+	let playersConfig = config.Players[dropDownValue("players")];	
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
@@ -158,7 +179,10 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
+retrieveOptions();
+
 document.getElementById("randomise").addEventListener("click", randomise);
+document.getElementById("players").addEventListener("click", storeOptions);
 
 let config;
 fetch("randomise.json")
