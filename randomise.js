@@ -27,10 +27,12 @@ function dropDownIndex(dropDownName) {
 
 function storeOptions() {
 	localStorage.setItem("players", document.getElementById("players").value);
+	localStorage.setItem("test", document.getElementById("test").value);
 }
 
 function retrieveOptions() {
 	document.getElementById("players").value = localStorage.getItem("players");
+	document.getElementById("test").value = localStorage.getItem("test");
 }
 
 function shuffle(array) {
@@ -181,10 +183,17 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-retrieveOptions();
+if(!localStorage.getItem("players")) {
+  storeOptions;
+} else {
+  retrieveOptions;
+}
+
 
 document.getElementById("randomise").addEventListener("click", randomise);
 document.getElementById("players").addEventListener("change", storeOptions);
+
+document.getElementById("test").onchange = storeOptions;
 
 let config;
 fetch("randomise.json")
