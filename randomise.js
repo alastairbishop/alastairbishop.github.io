@@ -26,7 +26,7 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
-	localStorage.setItem("players", dropDownValue("players"));
+	localStorage.setItem("players", document.getElementById("players").value);
 }
 
 function retrieveOptions() {
