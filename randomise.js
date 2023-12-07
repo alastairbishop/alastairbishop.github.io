@@ -1,5 +1,13 @@
 "use strict";
 
+console.log(localStorage.getItem("test"));
+if(!localStorage.getItem("test")) {
+	storeOptions;
+} else {
+	console.log("Calling retrieveOptions");
+	retrieveOptions;
+}
+
 function radioGroupValue(groupName) {
 	let radioGroup = document.getElementsByName(groupName);
 	let checked = Array.from(radioGroup).find((radio => radio.checked));
@@ -185,13 +193,7 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-console.log(localStorage.getItem("test"));
-if(!localStorage.getItem("test")) {
-	storeOptions;
-} else {
-	console.log("Calling retrieveOptions");
-	retrieveOptions;
-}
+
 
 
 document.getElementById("randomise").addEventListener("click", randomise);
