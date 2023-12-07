@@ -25,7 +25,7 @@ function shuffle(array) {
 }
 
 function chooseRandom (array, include, exclude, total) {
-	Shuffle(array);
+	shuffle(array);
 	let item;
 	let items = [...include];
 	let count = items.length;
