@@ -26,11 +26,13 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
+	console.log("Trying to store options");
 	localStorage.setItem("players", document.getElementById("players").value);
 	localStorage.setItem("test", document.getElementById("test").value);
 }
 
 function retrieveOptions() {
+	console.log("Trying to retrieve options");
 	document.getElementById("players").value = localStorage.getItem("players");
 	document.getElementById("test").value = localStorage.getItem("test");
 }
