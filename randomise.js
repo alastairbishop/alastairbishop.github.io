@@ -102,7 +102,7 @@ function randomise() {
 	let text = "<table>";
 	
 	// Players
-	let playersConfig = config.Players[RadioGroupValue("players")];	
+	let playersConfig = config.Players[radioGroupValue("players")];	
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
