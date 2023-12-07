@@ -1,12 +1,5 @@
 //"use strict";
 
-console.log(localStorage.getItem("test"));
-if(!localStorage.getItem("test")) {
-	storeOptions();
-} else {
-	console.log("Calling retrieveOptions");
-	retrieveOptions();
-}
 
 function radioGroupValue(groupName) {
 	let radioGroup = document.getElementsByName(groupName);
@@ -34,15 +27,11 @@ function dropDownIndex(dropDownName) {
 }
 
 function storeOptions() {
-	console.log("Trying to store options");
 	localStorage.setItem("players", document.getElementById("players").value);
-	localStorage.setItem("test", document.getElementById("test").value);
 }
 
 function retrieveOptions() {
-	console.log("Trying to retrieve options");
 	document.getElementById("players").value = localStorage.getItem("players");
-	document.getElementById("test").value = localStorage.getItem("test");
 }
 
 function shuffle(array) {
@@ -193,13 +182,15 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-
-
+if(!localStorage.getItem("players")) {
+	storeOptions();
+} else {
+	retrieveOptions();
+}
 
 document.getElementById("randomise").addEventListener("click", randomise);
 document.getElementById("players").addEventListener("change", storeOptions);
 
-document.getElementById("test").onchange = storeOptions;
 
 let config;
 fetch("randomise.json")
