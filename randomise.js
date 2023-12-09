@@ -35,10 +35,11 @@ function retrieveOptions() {
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
+	console.log(options);
 	let html = '<label for="' + dropdownName + '">' + label + '</label>';
 	html += '<select name="' + dropdownName + '" id="' + dropdownName + '">';
 	for (let i = 0; i < options.length; i++) {
-		html += '<option value="' + options[i];
+		html += '<option value="' + options[i] + '"';
 		if (i == 0) {
 			html += ' selected="selected"';
 		}
