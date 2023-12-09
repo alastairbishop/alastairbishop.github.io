@@ -112,6 +112,7 @@ function chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeCon
 	} else {
 		enforceAlwaysLeads = !ignoreAlwaysLeads;
 	}
+	console.log(alwaysLeads, ignoreAlwaysLeads, alwaysLeadsOption, enforceAlwaysLeads);
 	if (enforceAlwaysLeads) {
 		include.push(alwaysLeads);
 	}
