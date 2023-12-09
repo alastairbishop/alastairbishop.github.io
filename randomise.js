@@ -103,7 +103,16 @@ function chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeCon
 	let villainGroups = playersConfig.VillainGroups;
 	if ("Remove Villains" in schemeConfig) {villainGroups -= schemeConfig["Remove Villains"];}
 	let include = [];
-	if (!ignoreAlwaysLeads) {
+	let alwaysLeadsOption = document.getElementById("alwaysLeads");
+	let enforceAlwaysLeads;
+	if (alwaysLeadsOption == "Always") {
+		enforceAlwaysLeads = true;
+	} else if (alwaysLeadsOption == "Never") {
+		enforceAlwaysLeads = false;
+	} else {
+		enforceAlwaysLeads = !ignoreAlwaysLeads;
+	}
+	if (enforceAlwaysLeads) {
 		include.push(alwaysLeads);
 	}
 	return chooseRandom(config.Villains, include, [], villainGroups);
