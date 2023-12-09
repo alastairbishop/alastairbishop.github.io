@@ -209,7 +209,7 @@ function randomise() {
 
 
 let config;
-fetch("randomise.json")
+await fetch("randomise.json")
 	.then(response => response.json())
 	.then(data => {config = data});
 
