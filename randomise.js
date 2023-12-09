@@ -49,6 +49,8 @@ function buildDropdown(elementName, dropdownName, options, label) {
 }
 
 function buildOptions() {
+	console.log(config);
+	console.log(config.Players);
 	buildDropdown("playersDropdown", "players", Object.keys(config.Players), "Players:");
 	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads");
 }
