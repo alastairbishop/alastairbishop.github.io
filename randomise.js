@@ -205,12 +205,6 @@ function randomise() {
 	document.getElementById("result").innerHTML = text;
 }
 
-if(!localStorage.getItem("players")) {
-	storeOptions();
-} else {
-	retrieveOptions();
-}
-
 document.getElementById("randomise").addEventListener("click", randomise);
 document.getElementById("players").addEventListener("change", storeOptions);
 
@@ -221,4 +215,10 @@ fetch("randomise.json")
 	.then(data => {config = data});
 
 buildOptions();
+
+if(!localStorage.getItem("players")) {
+	storeOptions();
+} else {
+	retrieveOptions();
+}
 
