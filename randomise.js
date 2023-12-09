@@ -34,6 +34,25 @@ function retrieveOptions() {
 	document.getElementById("players").value = localStorage.getItem("players");
 }
 
+function buildDropdown(elementName, dropdownName, options, label) {
+	let html = '<label for="' + dropdownName + '">' + label + '</label>;
+	html += '<select name="' + dropdownName + '" id="' + dropdownName + '">';
+	for (let i = 0; i < options.length; i++) {
+		html += '<option value="' + options[i];
+		if (i == 0) {
+			html += ' select="selected"';
+		}
+		html += '>' + options[i] + '</option>';
+	}
+	html += '</select>';
+	doc.getElementById(elementName).innerHTML = html;
+}
+
+function buildOptions() {
+	buildDropdown("playersDropdown", "players", Object.keys(config["Players"], "Players:");
+	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads");
+}
+
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
   // While there remain elements to shuffle.
@@ -102,24 +121,28 @@ function chooseHenchmen(playersConfig, schemeConfig) {
 	return chooseRandom(config.Henchmen, include, [], henchmenGroups);	
 }
 
-function chooseVillainHeroes(schemeConfig) {
+function chooseVillainHeroes(schemeConfig, bigBad) {
 	let villainHeroes = [];
+	let excludeHeroes = [];
+	if (bigBad = "Angelus") {
+		excludeHeroes.push("Angel");
+	}
 	if ("Heroes in Villain Deck" in schemeConfig) {
 		let total = schemeConfig["Heroes in Villain Deck"];
 		let chooseFrom = config.Heroes;
 		if ("Heroes to include" in schemeConfig) {
 			chooseFrom = [...schemeConfig["Heroes to include"]];
 		}
-		villainHeroes = chooseRandom(chooseFrom, [], [], total);
+		villainHeroes = chooseRandom(chooseFrom, [], excludeHeroes, total);
 	}
 	return villainHeroes;
 }
 
-function chooseHeroes(villainHeroes, playersConfig, bigBad) {
+function chooseHeroes(excludeHeroes, playersConfig, bigBad) {
 	if (bigBad == "Angelus") {
 		villainHeroes.push("Angel");
 	}
-	return chooseRandom(config.Heroes, [], villainHeroes, playersConfig.Heroes);
+	return chooseRandom(config.Heroes, [], excludeHeroes, playersConfig.Heroes);
 }
 
 function randomise() {
@@ -163,7 +186,7 @@ function randomise() {
 	let bystanders = playersConfig.Bystanders;
 	text += "<tr><td>Bystanders</td><td>" + bystanders + "</td></tr>";
 	// Heroes
-	let villainHeroes = chooseVillainHeroes(schemeConfig);
+	let villainHeroes = chooseVillainHeroes(schemeConfig, bigBad);
 	if (villainHeroes.length > 0) {
 		text += "<tr><td>Heroes to include in villain deck</td><td>" + villainHeroes.join("<br/>") + "</td></tr>";
 	}
@@ -197,4 +220,5 @@ fetch("randomise.json")
 	.then(response => response.json())
 	.then(data => {config = data});
 
+buildOptions();
 
