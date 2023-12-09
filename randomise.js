@@ -37,7 +37,6 @@ function retrieveOptions() {
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
-	console.log(options);
 	let html = '<label for="' + dropdownName + '">' + label + '</label>';
 	html += '<select name="' + dropdownName + '" id="' + dropdownName + '">';
 	for (let i = 0; i < options.length; i++) {
@@ -48,13 +47,12 @@ function buildDropdown(elementName, dropdownName, options, label) {
 		html += '>' + options[i] + '</option>';
 	}
 	html += '</select>';
-	console.log(html);
 	document.getElementById(elementName).innerHTML = html;
 }
 
 function buildOptions() {
 	buildDropdown("playersDropdown", "players", Object.keys(config.Players).sort(), "Players:");
-	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads");
+	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads:");
 }
 
 function shuffle(array) {
@@ -225,6 +223,7 @@ fetch("randomise.json")
 
 		document.getElementById("randomise").addEventListener("click", randomise);
 		document.getElementById("players").addEventListener("change", storeOptions);
+		document.getElementById("alwaysLeads").addEventListener("change", storeOptions);
 		
 		});
 
