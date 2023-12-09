@@ -211,16 +211,18 @@ function randomise() {
 let config;
 await fetch("randomise.json")
 	.then(response => response.json())
-	.then(data => {config = data});
+	.then(data => {
+		config = data
+		buildOptions();
 
-buildOptions();
+		if(!localStorage.getItem("players")) {
+			storeOptions();
+		} else {
+			retrieveOptions();
+		}
 
-if(!localStorage.getItem("players")) {
-	storeOptions();
-} else {
-	retrieveOptions();
-}
-
-document.getElementById("randomise").addEventListener("click", randomise);
-document.getElementById("players").addEventListener("change", storeOptions);
+		document.getElementById("randomise").addEventListener("click", randomise);
+		document.getElementById("players").addEventListener("change", storeOptions);
+		
+		});
 
