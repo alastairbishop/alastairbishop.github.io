@@ -28,10 +28,12 @@ function dropDownIndex(dropDownName) {
 
 function storeOptions() {
 	localStorage.setItem("players", document.getElementById("players").value);
+	localStorage.setItem("alwaysLeads", document.getElementById("alwaysLeads").value);
 }
 
 function retrieveOptions() {
 	document.getElementById("players").value = localStorage.getItem("players");
+	document.getElementById("alwaysLeads").value = localStorage.getItem("alwaysLeads");
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
@@ -142,7 +144,7 @@ function chooseVillainHeroes(schemeConfig, bigBad) {
 
 function chooseHeroes(excludeHeroes, playersConfig, bigBad) {
 	if (bigBad == "Angelus") {
-		villainHeroes.push("Angel");
+		excludeHeroes.push("Angel");
 	}
 	return chooseRandom(config.Heroes, [], excludeHeroes, playersConfig.Heroes);
 }
