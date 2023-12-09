@@ -45,7 +45,7 @@ function buildDropdown(elementName, dropdownName, options, label) {
 		html += '>' + options[i] + '</option>';
 	}
 	html += '</select>';
-	doc.getElementById(elementName).innerHTML = html;
+	document.getElementById(elementName).innerHTML = html;
 }
 
 function buildOptions() {
