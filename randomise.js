@@ -40,18 +40,17 @@ function buildDropdown(elementName, dropdownName, options, label) {
 	for (let i = 0; i < options.length; i++) {
 		html += '<option value="' + options[i];
 		if (i == 0) {
-			html += ' select="selected"';
+			html += ' selected="selected"';
 		}
 		html += '>' + options[i] + '</option>';
 	}
 	html += '</select>';
+	console.log(html);
 	document.getElementById(elementName).innerHTML = html;
 }
 
 function buildOptions() {
-	console.log(config);
-	console.log(config.Players);
-	buildDropdown("playersDropdown", "players", Object.keys(config.Players), "Players:");
+	buildDropdown("playersDropdown", "players", Object.keys(config.Players).sort, "Players:");
 	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads");
 }
 
