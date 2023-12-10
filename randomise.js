@@ -155,6 +155,7 @@ function randomise() {
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
+	bigBad = "Angelus";
 	html += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
 	let bigBadConfig = config["Big bads"];
 	let alwaysLeads = bigBadConfig[bigBad];
