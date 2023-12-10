@@ -129,7 +129,7 @@ function chooseHenchmen() {
 function chooseVillainHeroes(bigBad) {
 	let villainHeroes = [];
 	let excludeHeroes = [];
-	if ((bigBad == "Angelus") && (!allowAngelAngelus)) {
+	if ((bigBad == "Angelus") && (allowAngelAngelus == "No")) {
 		excludeHeroes.push("Angel");
 	}
 	if ("Heroes in Villain Deck" in schemeConfig) {
@@ -144,7 +144,7 @@ function chooseVillainHeroes(bigBad) {
 }
 
 function chooseHeroes(excludeHeroes, bigBad) {
-	if ((bigBad == "Angelus") && (!allowAngelAngelus)) {
+	if ((bigBad == "Angelus") && (allowAngelAngelus == "No")) {
 		excludeHeroes.push("Angel");
 	}
 	return chooseRandom(config.Heroes, [], excludeHeroes, playersConfig.Heroes);
