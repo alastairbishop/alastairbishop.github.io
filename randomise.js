@@ -10,7 +10,7 @@ function storeOption(optionName) {
 }
 
 function retrieveOption(optionName) {
-	if (localStorage.getItem(optioneName)) {
+	if (localStorage.getItem(optionName)) {
 		document.getElementById(optionName).value = localStorage.getItem(optionName);
 	} else {
 		storeOption(optionName);
