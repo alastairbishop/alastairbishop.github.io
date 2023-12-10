@@ -154,7 +154,7 @@ function randomise() {
 	playersConfig = config.Players[dropDownText("players")];	
 
 	// Big bad
-	let bigBad = chooseBigBad(playersConfig)[0];
+	let bigBad = chooseBigBad()[0];
 	bigBad = "Angelus";
 	html += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
 	let bigBadConfig = config["Big bads"];
@@ -162,7 +162,7 @@ function randomise() {
 	let ignoreAlwaysLeads = ("IgnoreAlwaysLeads" in playersConfig);
 
 	// Scheme
-	let scheme = chooseScheme(playersConfig)[0];
+	let scheme = chooseScheme()[0];
 	schemeConfig = config.Schemes[scheme];
 	html += "<tr><td>Scheme</td><td>" + scheme + "</td></tr>";
 	
@@ -174,10 +174,10 @@ function randomise() {
 	let masterStrikes = playersConfig.MasterStrikes;
 	html += "<tr><td>Master strikes</td><td>" + masterStrikes + "</td></tr>";
 	// Villains
-	let villains = chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeConfig);
+	let villains = chooseVillains(alwaysLeads, ignoreAlwaysLeads);
 	html += "<tr><td>Villains</td><td>" + villains.join("<br/>") + "</td></tr>";
 	// Henchmen
-	let henchmen = chooseHenchmen(playersConfig, schemeConfig);
+	let henchmen = chooseHenchmen();
 	html += "<tr><td>Henchmen</td><td>"
 	if ("HenchmenCards" in playersConfig) {
 		html += playersConfig.HenchmenCards + " cards from " + henchmen;
@@ -189,13 +189,13 @@ function randomise() {
 	let bystanders = playersConfig.Bystanders;
 	html += "<tr><td>Bystanders</td><td>" + bystanders + "</td></tr>";
 	// Heroes in villain deck
-	let villainHeroes = chooseVillainHeroes(schemeConfig, bigBad);
+	let villainHeroes = chooseVillainHeroes(bigBad);
 	if (villainHeroes.length > 0) {
 		html += "<tr><td>Heroes to include in villain deck</td><td>" + villainHeroes.join("<br/>") + "</td></tr>";
 	}
 	
 	// Hero deck
-	let heroes = chooseHeroes(villainHeroes, playersConfig, bigBad);
+	let heroes = chooseHeroes(villainHeroes, bigBad);
 	html += "<tr><td>Heroes</td><td>" + heroes.join("<br/>") + "</td></tr>";
 	
 	// Starting courage tokens
