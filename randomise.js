@@ -126,7 +126,7 @@ function chooseHenchmen() {
 function chooseVillainHeroes(bigBad) {
 	let villainHeroes = [];
 	let excludeHeroes = [];
-	if (bigBad = "Angelus") {
+	if (bigBad == "Angelus") {
 		excludeHeroes.push("Angel");
 	}
 	if ("Heroes in Villain Deck" in schemeConfig) {
