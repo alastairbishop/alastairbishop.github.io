@@ -6,8 +6,6 @@ function dropDownText(dropDownName) {
 }
 
 function storeOption(optionName) {
-	console.log(optionName);
-	console.log(document.getElementById(optionName));
 	localStorage.setItem(optionName, document.getElementById(optionName).value);
 }
 
