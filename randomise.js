@@ -221,7 +221,7 @@ fetch("randomise.json")
 		retrieveOptions();
 
 		document.getElementById("randomise").addEventListener("click", randomise);
-		document.getElementById("players").addEventListener("change", storeOption;
+		document.getElementById("players").addEventListener("change", storeOption);
 		document.getElementById("alwaysLeads").addEventListener("change", storeOption);
 		
 	});
