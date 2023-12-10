@@ -1,39 +1,29 @@
 //"use strict";
 
-
-function radioGroupValue(groupName) {
-	let radioGroup = document.getElementsByName(groupName);
-	let checked = Array.from(radioGroup).find((radio => radio.checked));
-	if (checked === undefined) {
-		return "";
-	} else {
-		return checked.value;
-	}
-}
-
-function dropDownValue(dropDownName) {
-	let e = document.getElementById(dropDownName);
-	return e.options[e.selectedIndex].value;
-}
-
 function dropDownText(dropDownName) {
 	let e = document.getElementById(dropDownName);
 	return e.options[e.selectedIndex].text;
 }
 
-function dropDownIndex(dropDownName) {
-	let e = document.getElementById(dropDownName);
-	return e.selectedIndex;
+function storeOption(optionName) {
+	localStorage.setItem(optionName, document.getElementById(optionName).value);
 }
 
-function storeOptions() {
-	localStorage.setItem("players", document.getElementById("players").value);
-	localStorage.setItem("alwaysLeads", document.getElementById("alwaysLeads").value);
+function retrieveOption(optionName) {
+	document.getElementById(optionName).value = localStorage.getItem(optionName);
 }
 
-function retrieveOptions() {
-	document.getElementById("players").value = localStorage.getItem("players");
-	document.getElementById("alwaysLeads").value = localStorage.getItem("alwaysLeads");
+function storeRetrieveOption(optionName) {
+	if (localStorage.getItem(optionName)) {
+		retrieveOption(optionName);
+	} else {
+		storeOption(optionName);
+	}
+}
+
+function storeRetrieveOptions() {
+	storeRetrieveOption("players");
+	storeRetrieveOption("alwaysLeads");
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
@@ -91,7 +81,7 @@ function chooseBigBad() {
 	return chooseRandom(Object.keys(config["Big bads"]), [], [], 1);	
 }
 
-function chooseScheme(playersConfig) {
+function chooseScheme() {
 	let excludeSchemes = [];
 	if ("ExcludeSchemes" in playersConfig) {
 		excludeSchemes = [...playersConfig.ExcludeSchemes];
@@ -99,7 +89,7 @@ function chooseScheme(playersConfig) {
 	return chooseRandom(Object.keys(config.Schemes), [], excludeSchemes, 1);	
 }
 
-function chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeConfig) {
+function chooseVillains(alwaysLeads, ignoreAlwaysLeads) {
 	let villainGroups = playersConfig.VillainGroups;
 	if ("Remove Villains" in schemeConfig) {villainGroups -= schemeConfig["Remove Villains"];}
 	let include = [];
@@ -119,7 +109,7 @@ function chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeCon
 	return chooseRandom(config.Villains, include, [], villainGroups);
 }
 
-function chooseHenchmen(playersConfig, schemeConfig) {
+function chooseHenchmen() {
 	let henchmenGroups;
 	if ("HenchmenCards" in playersConfig) {
 		henchmenGroups = 1
@@ -133,7 +123,7 @@ function chooseHenchmen(playersConfig, schemeConfig) {
 	return chooseRandom(config.Henchmen, include, [], henchmenGroups);	
 }
 
-function chooseVillainHeroes(schemeConfig, bigBad) {
+function chooseVillainHeroes(bigBad) {
 	let villainHeroes = [];
 	let excludeHeroes = [];
 	if (bigBad = "Angelus") {
@@ -150,7 +140,7 @@ function chooseVillainHeroes(schemeConfig, bigBad) {
 	return villainHeroes;
 }
 
-function chooseHeroes(excludeHeroes, playersConfig, bigBad) {
+function chooseHeroes(excludeHeroes, bigBad) {
 	if (bigBad == "Angelus") {
 		excludeHeroes.push("Angel");
 	}
@@ -158,82 +148,81 @@ function chooseHeroes(excludeHeroes, playersConfig, bigBad) {
 }
 
 function randomise() {
-	let text = "<table>";
+	let html = "<table>";
 	
 	// Players
-	let playersConfig = config.Players[dropDownText("players")];	
+	playersConfig = config.Players[dropDownText("players")];	
 
 	// Big bad
 	let bigBad = chooseBigBad(playersConfig)[0];
-	text += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
+	html += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
 	let bigBadConfig = config["Big bads"];
 	let alwaysLeads = bigBadConfig[bigBad];
 	let ignoreAlwaysLeads = ("IgnoreAlwaysLeads" in playersConfig);
 
 	// Scheme
 	let scheme = chooseScheme(playersConfig)[0];
-	let schemeConfig = config.Schemes[scheme];
-	text += "<tr><td>Scheme</td><td>" + scheme + "</td></tr>";
+	schemeConfig = config.Schemes[scheme];
+	html += "<tr><td>Scheme</td><td>" + scheme + "</td></tr>";
 	
 	// Villain deck
 	//Scheme twists
 	let schemeTwists = schemeConfig["Scheme twists"];
-	text += "<tr><td>Scheme twists</td><td>" + schemeTwists + "</td></tr>"
+	html += "<tr><td>Scheme twists</td><td>" + schemeTwists + "</td></tr>"
 	// Master strikes
 	let masterStrikes = playersConfig.MasterStrikes;
-	text += "<tr><td>Master strikes</td><td>" + masterStrikes + "</td></tr>";
+	html += "<tr><td>Master strikes</td><td>" + masterStrikes + "</td></tr>";
 	// Villains
 	let villains = chooseVillains(playersConfig, alwaysLeads, ignoreAlwaysLeads, schemeConfig);
-	text += "<tr><td>Villains</td><td>" + villains.join("<br/>") + "</td></tr>";
+	html += "<tr><td>Villains</td><td>" + villains.join("<br/>") + "</td></tr>";
 	// Henchmen
 	let henchmen = chooseHenchmen(playersConfig, schemeConfig);
-	text += "<tr><td>Henchmen</td><td>"
+	html += "<tr><td>Henchmen</td><td>"
 	if ("HenchmenCards" in playersConfig) {
-		text += playersConfig.HenchmenCards + " cards from " + henchmen;
+		html += playersConfig.HenchmenCards + " cards from " + henchmen;
 	} else {
-		text += henchmen.join("<br/>");
+		html += henchmen.join("<br/>");
 	}
-	text += "</td></tr>"
+	html += "</td></tr>"
 	// Bystanders
 	let bystanders = playersConfig.Bystanders;
-	text += "<tr><td>Bystanders</td><td>" + bystanders + "</td></tr>";
-	// Heroes
+	html += "<tr><td>Bystanders</td><td>" + bystanders + "</td></tr>";
+	// Heroes in villain deck
 	let villainHeroes = chooseVillainHeroes(schemeConfig, bigBad);
 	if (villainHeroes.length > 0) {
-		text += "<tr><td>Heroes to include in villain deck</td><td>" + villainHeroes.join("<br/>") + "</td></tr>";
+		html += "<tr><td>Heroes to include in villain deck</td><td>" + villainHeroes.join("<br/>") + "</td></tr>";
 	}
 	
 	// Hero deck
 	let heroes = chooseHeroes(villainHeroes, playersConfig, bigBad);
-	text += "<tr><td>Heroes</td><td>" + heroes.join("<br/>") + "</td></tr>";
+	html += "<tr><td>Heroes</td><td>" + heroes.join("<br/>") + "</td></tr>";
 	
 	// Starting courage tokens
 	if ("Starting courage tokens per player" in schemeConfig) {
-		text += "<tr><td>Starting courage tokens per player</td><td>"
+		html += "<tr><td>Starting courage tokens per player</td><td>"
 		+ schemeConfig["Starting courage tokens per player"] + "</td></tr>";
 	}
-	text += "</table>"
+	html += "</table>"
 	
-	document.getElementById("result").innerHTML = text;
+	document.getElementById("result").innerHTML = html;
 }
 
 
 let config;
+let playersConfig;
+let schemeConfig;
+
 fetch("randomise.json")
 	.then(response => response.json())
 	.then(data => {
 		config = data
 		buildOptions();
 
-		if(!localStorage.getItem("players")) {
-			storeOptions();
-		} else {
-			retrieveOptions();
-		}
+		storeRetrieveOptions();
 
 		document.getElementById("randomise").addEventListener("click", randomise);
-		document.getElementById("players").addEventListener("change", storeOptions);
-		document.getElementById("alwaysLeads").addEventListener("change", storeOptions);
+		document.getElementById("players").addEventListener("change", storeOption("players"));
+		document.getElementById("alwaysLeads").addEventListener("change", storeOption("alwaysLeads"));
 		
 		});
 
