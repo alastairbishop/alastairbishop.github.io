@@ -10,20 +10,21 @@ function storeOption(optionName) {
 }
 
 function retrieveOption(optionName) {
-	document.getElementById(optionName).value = localStorage.getItem(optionName);
-}
-
-function storeRetrieveOption(optionName) {
-	if (localStorage.getItem(optionName)) {
-		retrieveOption(optionName);
+	if (localStorage.getItem(optioneName)) {
+		document.getElementById(optionName).value = localStorage.getItem(optionName);
 	} else {
 		storeOption(optionName);
 	}
 }
 
-function storeRetrieveOptions() {
-	storeRetrieveOption("players");
-	storeRetrieveOption("alwaysLeads");
+function retrieveOptions() {
+	retrieveOption("players");
+	retrieveOption("alwaysLeads");
+}
+
+function storeOptions() {
+	storeOption("players");
+	storeOption("alwaysLeads");
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
@@ -102,7 +103,6 @@ function chooseVillains(alwaysLeads, ignoreAlwaysLeads) {
 	} else {
 		enforceAlwaysLeads = !ignoreAlwaysLeads;
 	}
-	console.log(alwaysLeads, ignoreAlwaysLeads, alwaysLeadsOption, enforceAlwaysLeads);
 	if (enforceAlwaysLeads) {
 		include.push(alwaysLeads);
 	}
@@ -218,11 +218,11 @@ fetch("randomise.json")
 		config = data
 		buildOptions();
 
-		storeRetrieveOptions();
+		retrieveOptions();
 
 		document.getElementById("randomise").addEventListener("click", randomise);
-		document.getElementById("players").addEventListener("change", storeOption("players"));
-		document.getElementById("alwaysLeads").addEventListener("change", storeOption("alwaysLeads"));
+		document.getElementById("players").addEventListener("change", storeOption;
+		document.getElementById("alwaysLeads").addEventListener("change", storeOption);
 		
-		});
+	});
 
