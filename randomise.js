@@ -20,11 +20,13 @@ function retrieveOption(optionName) {
 function retrieveOptions() {
 	retrieveOption("players");
 	retrieveOption("alwaysLeads");
+	retrieveOption("allowAngelAngelus");
 }
 
 function storeOptions() {
 	storeOption("players");
 	storeOption("alwaysLeads");
+	storeOption("allowAngelAngelus");
 }
 
 function buildDropdown(elementName, dropdownName, options, label) {
@@ -44,6 +46,7 @@ function buildDropdown(elementName, dropdownName, options, label) {
 function buildOptions() {
 	buildDropdown("playersDropdown", "players", Object.keys(config.Players).sort(), "Players");
 	buildDropdown("alwaysLeadsDropdown", "alwaysLeads", ["Standard", "Always", "Never"], "Enforce Always Leads");
+	buildDropdown("angelAngelusDropdown", "allowAngelAngelus", ["Yes", "No"], "Allow Angel + Angelus");
 }
 
 function shuffle(array) {
@@ -126,7 +129,7 @@ function chooseHenchmen() {
 function chooseVillainHeroes(bigBad) {
 	let villainHeroes = [];
 	let excludeHeroes = [];
-	if (bigBad == "Angelus") {
+	if ((bigBad == "Angelus") && (!allowAngelAngelus)) {
 		excludeHeroes.push("Angel");
 	}
 	if ("Heroes in Villain Deck" in schemeConfig) {
@@ -141,7 +144,7 @@ function chooseVillainHeroes(bigBad) {
 }
 
 function chooseHeroes(excludeHeroes, bigBad) {
-	if (bigBad == "Angelus") {
+	if ((bigBad == "Angelus") && (!allowAngelAngelus)) {
 		excludeHeroes.push("Angel");
 	}
 	return chooseRandom(config.Heroes, [], excludeHeroes, playersConfig.Heroes);
@@ -155,6 +158,7 @@ function randomise() {
 
 	// Big bad
 	let bigBad = chooseBigBad()[0];
+	allowAngelAngelus = document.getElementById("allowAngelAngelus").value;
 	html += "<tr><td>Big bad</td><td>" + bigBad + "</td></tr>";
 	let bigBadConfig = config["Big bads"];
 	let alwaysLeads = bigBadConfig[bigBad];
@@ -211,6 +215,7 @@ function randomise() {
 let config;
 let playersConfig;
 let schemeConfig;
+let allowAngelAngelus;
 
 fetch("randomise.json")
 	.then(response => response.json())
@@ -223,6 +228,7 @@ fetch("randomise.json")
 		document.getElementById("randomise").addEventListener("click", randomise);
 		document.getElementById("players").addEventListener("change", storeOptions);
 		document.getElementById("alwaysLeads").addEventListener("change", storeOptions);
+		document.getElementById("allowAngelAngelus").addEventListener("change", storeOptions);
 		
 	});
 
