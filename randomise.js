@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 function dropDownText(dropDownName) {
 	let e = document.getElementById(dropDownName);
