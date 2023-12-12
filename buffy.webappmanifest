@@ -4,7 +4,7 @@
 	"description": "Randomises game setup for the Legendary Buffy the Vampire Slayer card game.",
 	"start_url": "/",
 	"display": "fullscreen",
-	icons [
+	"icons": [
 		{
 			"src": "android-chrome-192x192.png",
 			"sizes": "192x192"
