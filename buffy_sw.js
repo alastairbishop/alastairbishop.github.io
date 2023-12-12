@@ -1,10 +1,10 @@
-const VERSION = "20231212003";
+const VERSION = "20231212004";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
 	"/buffy.html",
 	"/buffy.css",
-	"/buffy.js",
+	"/buffy.js?v=20231212004",
 	"/buffy.json"
 ];
 
