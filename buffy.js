@@ -217,7 +217,7 @@ let playersConfig;
 let schemeConfig;
 let allowAngelAngelus;
 
-fetch("randomise.json")
+fetch("buffy.json")
 	.then(response => response.json())
 	.then(data => {
 		config = data
