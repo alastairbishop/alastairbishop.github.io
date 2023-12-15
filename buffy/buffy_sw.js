@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20231215006";
+const VERSION = "20231215007";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
@@ -43,7 +43,6 @@ self.addEventListener("fetch", (event) => {
   // when seeking an HTML page
   if (event.request.mode === "navigate") {
     // Return to the index.html page
-	console.log(caches.match("index.html"));
     event.respondWith(caches.match("index.html"));
     return;
   }
