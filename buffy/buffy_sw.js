@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20231215019";
+const VERSION = "20231215020";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
@@ -11,8 +11,7 @@ const APP_STATIC_RESOURCES = [
 	"buffy.json",
 	"buffy_manifest.json",
 	"icons/android-chrome-192x192.png",
-	"icons/android-chrome-512x512.png",
-	"https://storage.ko-fi.com/cdn/kofi2.png?v=3"
+	"icons/android-chrome-512x512.png"
 ];
 
 self.addEventListener("install", (event) => {
