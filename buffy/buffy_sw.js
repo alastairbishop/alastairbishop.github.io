@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20231215014";
+const VERSION = "20231215016";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
