@@ -4,11 +4,11 @@ const VERSION = "20231215003";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
-	"/buffy/index.html",
-	"/buffy/picnic.css",
-	"/buffy/buffy.css",
-	"/buffy/buffy.js",
-	"/buffy/buffy.json"
+	"index.html",
+	"picnic.css",
+	"buffy.css",
+	"buffy.js",
+	"buffy.json"
 ];
 
 self.addEventListener("install", (event) => {
@@ -40,8 +40,8 @@ self.addEventListener("fetch", (event) => {
   // when seeking an HTML page
   if (event.request.mode === "navigate") {
     // Return to the index.html page
-	console.log(caches.match("/buffy/index.html"));
-    event.respondWith(caches.match("/buffy/index.html"));
+	console.log(caches.match("index.html"));
+    event.respondWith(caches.match("index.html"));
     return;
   }
 
