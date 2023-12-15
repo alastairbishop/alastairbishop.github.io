@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20231215004";
+const VERSION = "20231215005";
 const CACHE_NAME = `buffy-${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
@@ -8,7 +8,8 @@ const APP_STATIC_RESOURCES = [
 	"picnic.css",
 	"buffy.css",
 	"buffy.js",
-	"buffy.json"
+	"buffy.json",
+	"buffy_manifest.json"
 ];
 
 self.addEventListener("install", (event) => {
