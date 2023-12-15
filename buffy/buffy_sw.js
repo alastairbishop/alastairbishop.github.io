@@ -40,6 +40,7 @@ self.addEventListener("fetch", (event) => {
   // when seeking an HTML page
   if (event.request.mode === "navigate") {
     // Return to the index.html page
+	console.log(caches.match("/index.html"));
     event.respondWith(caches.match("/index.html"));
     return;
   }
