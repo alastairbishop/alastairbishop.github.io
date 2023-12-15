@@ -54,8 +54,6 @@ self.addEventListener("fetch", (event) => {
         return cachedResponse;
       }
       // Respond with a HTTP 404 response status.
-	  console.log(cachedResponse);
-	  console.log(event);
       return new Response(null, { status: 404 });
     })(),
   );
